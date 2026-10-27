@@ -1,0 +1,83 @@
+{
+  "name": "career-radar",
+  "version": "0.7.0",
+  "private": true,
+  "productName": "Career Radar",
+  "author": "shyfox-01",
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "src/desktop/main.js",
+  "type": "module",
+  "description": "A private local-first job search workspace for Singapore, mainland China, and Hong Kong.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "pretest": "node -e \"require('node:fs').mkdirSync('.career-radar-data',{recursive:true})\"",
+    "test": "node --test",
+    "check": "node --check src/server.js && prettier --check . && npm test",
+    "format": "prettier --write .",
+    "acceptance:final": "electron scripts/final-acceptance.mjs",
+    "check:sources": "electron scripts/probe-live-sources.mjs",
+    "desktop": "electron .",
+    "package:win": "node scripts/package-windows.mjs --win nsis portable --x64",
+    "package:dir": "node scripts/package-windows.mjs --dir --win --x64"
+  },
+  "dependencies": {
+    "jszip": "3.10.1",
+    "mammoth": "1.12.2",
+    "pdf-parse": "2.4.5"
+  },
+  "devDependencies": {
+    "docx": "9.7.1",
+    "electron": "44.2.0",
+    "electron-builder": "26.15.3",
+    "pdfkit": "0.20.2",
+    "prettier": "3.3.3"
+  },
+  "build": {
+    "appId": "local.careerradar.desktop",
+    "productName": "Career Radar",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "public/**/*",
+      "package.json",
+      "README.md",
+      "README.zh-CN.md",
+      "START_HERE_USER.md",
+      "LICENSE",
+      "!**/*.test.*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "artifactName": "CareerRadar-Setup-${version}.${ext}",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": "always",
+      "license": "LICENSE"
+    },
+    "portable": {
+      "artifactName": "CareerRadar-Portable-${version}.${ext}"
+    }
+  }
+}
