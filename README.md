@@ -100,4 +100,4 @@ Screenshots use a fictional resume.
 Free to read and to use for your own job search; redistribution needs permission. See
 [LICENSE](LICENSE).
 
-Developed by shyfox-01 with assistance from Claude and Codex.
+Developed by shyfox-01.

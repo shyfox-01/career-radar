@@ -84,4 +84,4 @@ npm run desktop
 
 可以阅读源码，也可以用于自己的求职；再分发需要授权，详见 [LICENSE](LICENSE)。
 
-作者：shyfox-01。开发辅助：Claude、Codex。
+作者：shyfox-01。
