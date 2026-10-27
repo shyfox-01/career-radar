@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.build-cache/
+agent-notes/
+.career-radar-data/
+package-lock.json
+*.md
+*.html

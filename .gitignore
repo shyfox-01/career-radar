@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.career-radar-data/
+.env
+.env.*
+!.env.example
+coverage/
+.cache/
+*.log
+*.pdf
+*.docx
+*.csv
+.DS_Store
+Thumbs.db
+
+# Local working notes, not part of the project
+agent-notes/
+
+# electron-builder tool cache, kept on the project volume (see scripts/package-windows.mjs)
+.build-cache/
