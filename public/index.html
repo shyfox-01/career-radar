@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta
+      name="description"
+      content="面向新加坡、中国大陆和中国香港的本地优先求职搜索与投递管理工具。"
+    />
+    <title>Career Radar — 本地求职雷达</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/app.js"></script>
+    <script type="module" src="/workflow.js"></script>
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <header class="masthead">
+      <a class="brand" href="#top" aria-label="返回 Career Radar 首页">
+        <span class="brand-mark">CR</span>
+        <span><strong>Career Radar</strong><small>JOB SEARCH WORKSPACE</small></span>
+      </a>
+      <div class="account" id="account-pill" aria-live="polite">
+        <span class="status-dot"></span>
+        <span>正在检查 AI…</span>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow">THREE MARKETS · ONE EVIDENCE TRAIL</p>
+          <h1 id="hero-title">Turn a Resume into a Focused Search Map.</h1>
+          <p class="hero-copy">
+            覆盖新加坡、中国大陆和中国香港：规划搜索、核验岗位、筛选机会并记录投递状态。
+            程序不会替你自动投递，也不会绕过网站限制。
+          </p>
+        </div>
+        <div class="hero-orbit" aria-hidden="true">
+          <span class="orbit-label sg">SG</span>
+          <span class="orbit-label cn">CN</span>
+          <span class="orbit-label hk">HK</span>
+          <span class="radar-line"></span>
+        </div>
+      </section>
+
+      <section class="metrics" aria-label="工作区概览">
+        <article><strong id="metric-plan">0</strong><span>SEARCH ROUTES</span></article>
+        <article><strong id="metric-jobs">0</strong><span>JOB LEADS</span></article>
+        <article><strong id="metric-applied">0</strong><span>APPLICATIONS</span></article>
+        <article><strong id="metric-verified">0</strong><span>VERIFIED SOURCES</span></article>
+      </section>
+
+      <div class="workspace-grid">
+        <aside class="route-rail" aria-label="使用流程">
+          <p class="rail-title">WORKFLOW</p>
+          <ol>
+            <li><a href="#providers-panel"><span>00</span>AI CONNECTION</a></li>
+            <li><a href="#profile-panel"><span>01</span>PROFILE</a></li>
+            <li><a href="#markets-panel"><span>02</span>MARKETS</a></li>
+            <li><a href="#sources-panel"><span>03</span>SOURCES</a></li>
+            <li><a href="#jobs-panel"><span>04</span>JOB LIST</a></li>
+          </ol>
+          <div class="local-note">
+            <span>LOCAL</span>
+            <p>简历和职位记录保存在这台电脑的本地数据目录中。</p>
+          </div>
+        </aside>
+
+        <div class="desk">
+          <section class="panel" id="providers-panel">
+            <div class="panel-heading">
+              <div><span class="step">00 / AI CONNECTION</span><h2>Local Model</h2></div>
+              <button class="button secondary compact" id="refresh-providers" type="button">Re-detect / 重新检测</button>
+            </div>
+            <div class="provider-intro">
+              <p>AI 筛选由这台电脑上的 Ollama 模型完成，不产生调用费用，简历不离开本机。没有本地模型时，渠道读取器和职位台账照常可用。</p>
+              <span>No cloud AI / 不使用云端 AI</span>
+            </div>
+            <div id="provider-list" class="provider-list empty-state">正在检测本地模型；未运行时会自动启动 Ollama…</div>
+          </section>
+
+          <section class="panel" id="profile-panel">
+            <div class="panel-heading">
+              <div><span class="step">01 / PROFILE</span><h2>Resume Profile</h2></div>
+              <span class="panel-state" id="resume-state">Not uploaded / 尚未上传</span>
+            </div>
+            <div class="resume-grid">
+              <label class="drop-zone" id="drop-zone">
+                <input id="resume-file" type="file" accept=".pdf,.docx,.txt,.md" />
+                <span class="drop-icon">↗</span>
+                <strong>Drop a file or choose one</strong>
+                <small>拖入文件或选择文件 · PDF、DOCX、TXT、Markdown · 最大 10 MB</small>
+              </label>
+              <div class="paste-zone">
+                <label for="resume-text">PASTE RESUME TEXT / 粘贴简历文字</label>
+                <textarea id="resume-text" rows="5" placeholder="Paste only what you want analyzed / 只粘贴你愿意用于分析的内容……"></textarea>
+                <button class="button secondary" id="paste-resume" type="button">Create Redacted Preview / 生成脱敏预览</button>
+              </div>
+            </div>
+            <details class="preview-box" id="resume-preview-box">
+              <summary>检查将交给本地模型的脱敏文字</summary>
+              <pre id="resume-preview">尚未导入任何内容。</pre>
+            </details>
+            <p class="privacy-line">
+              邮箱、电话和个人主页等联系方式默认会被隐藏。AI 筛选只在本机进行：
+              上方脱敏文字和搜索方案留在这台电脑上，招聘网站只收到搜索关键词。
+            </p>
+          </section>
+
+          <section class="panel" id="preferences-panel">
+            <div class="panel-heading">
+              <div><span class="step">01B / PREFERENCES</span><h2>Career Preferences</h2></div>
+              <span class="panel-state" id="preferences-state">Optional / 可选补充</span>
+            </div>
+            <form id="preferences-form" class="preferences-form">
+              <div class="field-grid two-columns">
+                <label><span>GRADUATION DATE / 毕业日期</span><input name="graduationDate" type="date" /></label>
+                <label><span>INTERNSHIP AVAILABLE FROM / 最早可开始实习</span><input name="internshipAvailableFrom" type="date" /></label>
+              </div>
+              <div class="field-grid two-columns">
+                <label><span>INDUSTRIES / 行业</span><textarea name="industries" rows="3" placeholder="FinTech, healthcare, internet / 金融科技、医疗、互联网"></textarea></label>
+                <label><span>ROLE INTERESTS / 意向岗位</span><textarea name="roleInterests" rows="3" placeholder="AI Engineer, Data Scientist, Product Manager"></textarea></label>
+                <label><span>JOB SKILLS / 求职技能</span><textarea name="emphasizedSkills" rows="3" placeholder="Python, SQL, LLM, data preprocessing"></textarea></label>
+                <label><span>WORK TO AVOID / 不考虑方向</span><textarea name="excludedWork" rows="3" placeholder="Only enter firm exclusions / 只填明确不考虑的方向"></textarea></label>
+              </div>
+              <label class="wide-field"><span>CAREER NOTE / 其他求职补充</span><textarea name="careerNote" rows="4" placeholder="只写与求职有关、但简历中没有说明的信息。系统会忽略无关内容。"></textarea></label>
+              <div class="form-actions">
+                <button class="button primary" type="submit">Save Preferences / 保存补充资料</button>
+                <span>这些信息与简历分开保存，并只用于生成岗位方向、时间判断和搜索路线。</span>
+              </div>
+            </form>
+          </section>
+
+          <section class="panel" id="markets-panel">
+            <div class="panel-heading">
+              <div><span class="step">02 / MARKETS</span><h2>Markets &amp; Role Families</h2></div>
+              <span class="panel-state">Editable anytime / 可随时修改</span>
+            </div>
+            <form id="criteria-form">
+              <fieldset>
+                <legend>TARGET MARKETS</legend>
+                <div class="choice-grid market-choices">
+                  <label><input type="checkbox" name="markets" value="SG" checked /><span><b>SG</b>新加坡<small>英语岗位 · 区域总部</small></span></label>
+                  <label><input type="checkbox" name="markets" value="CN" /><span><b>CN</b>中国大陆<small>中文岗位 · 主要城市</small></span></label>
+                  <label><input type="checkbox" name="markets" value="HK" /><span><b>HK</b>中国香港<small>英语 / 中文岗位</small></span></label>
+                </div>
+              </fieldset>
+              <fieldset>
+                <div class="legend-row">
+                  <legend>ROLE SUGGESTIONS / 岗位建议</legend>
+                  <button class="button secondary compact" id="suggest-roles" type="button">Suggest Roles / 生成岗位建议</button>
+                </div>
+                <p class="field-help">根据脱敏简历和补充资料生成，最多显示 12 个；建议不会自动进入搜索。</p>
+                <div id="role-suggestions" class="role-suggestions empty-state">上传简历或填写补充资料后，点击“生成岗位建议”。</div>
+                <div class="role-approval">
+                  <label><span>CUSTOM TARGET ROLES / 补充意向岗位名称</span><input id="custom-roles" placeholder="如 AI Product Manager；用逗号分隔" /></label>
+                  <button class="button primary" id="approve-roles" type="button">Approve Selected Roles / 确认所选岗位</button>
+                </div>
+                <p class="approved-line" id="approved-roles-state">尚未确认岗位；搜索只会使用你明确确认的名称。</p>
+              </fieldset>
+              <fieldset>
+                <legend>EMPLOYMENT TYPE</legend>
+                <div class="chip-row">
+                  <label><input type="checkbox" name="employment" value="internship" checked /><span>实习 / Internship</span></label>
+                  <label><input type="checkbox" name="employment" value="full_time" /><span>正式岗 / Full-time</span></label>
+                </div>
+              </fieldset>
+              <div class="form-actions">
+                <button class="button primary" type="submit">Generate Search Map / 生成搜索路线</button>
+                <span>仅使用已确认岗位。工作天数不会直接排除高质量机会。</span>
+              </div>
+            </form>
+          </section>
+
+          <section class="panel" id="sources-panel">
+            <div class="panel-heading">
+              <div><span class="step">03 / SOURCES</span><h2>Search Sources</h2></div>
+              <div class="panel-actions"><button class="button signal" id="discover" type="button">Find / Continue Jobs · 搜索 / 继续</button><button class="button secondary" id="cancel-search" type="button" hidden>Pause / 暂停</button></div>
+            </div>
+            <div class="coverage-banner source-session-help">
+              <strong>Connect / 登录连接 — login test ≠ complete search / 登录测试不等于已搜索完毕</strong>
+              <span>Connect opens the source window. After login, the app tests reading and hides the verified window. Find / Continue Jobs reads further pages and saves progress. Keep reading windows open; idle windows may be closed without signing out.<br>点击 Connect 弹出来源窗口；登录后自动测试读取，通过后隐藏。点击搜索 / 继续才正式翻页并保存进度。读取期间保持窗口打开；空闲时关闭不会退出登录。</span>
+              <span>On Windows, a site can make the system open a "Choose a passkey" dialog over its login form. That dialog blocks typing until you cancel it; cancelling it does not affect email and password sign-in.<br>在 Windows 上，网站可能让系统在登录表单上方弹出“选择通行密钥”窗口。该窗口打开时无法输入，点取消即可继续用邮箱和密码登录。</span>
+              <span>Excel includes jobs and a Search coverage sheet listing unfinished sources. A login, CAPTCHA, page limit or unsupported page is never reported as a completed scan.<br>Excel 同时包含职位和搜索覆盖表。需要登录、验证码、到达批次上限或页面尚不支持时，都会标为未完成。</span>
+            </div>
+            <div class="source-picker-heading">
+              <div><span class="step">SELECT BEFORE SEARCH</span><h3>Source Catalog</h3></div>
+              <span class="default-key">DEFAULT / 默认</span>
+            </div>
+            <div id="source-catalog" class="source-catalog empty-state">正在读取三地来源目录…</div>
+            <div class="queue-strip" id="queue-state">尚未生成队列 · 每次最多执行 40 条搜索组合</div>
+            <div class="queue-strip" id="scan-progress" aria-live="polite">Not scanned yet / 尚未扫描</div>
+            <div class="queue-strip search-diagnostics" id="search-diagnostics" aria-live="polite" hidden></div>
+            <label class="field-help"><input type="checkbox" id="auto-continue-search" checked /> Continue queued pages automatically (up to 10 batches; Pause anytime). Login and page errors stop repeated retries.<br>自动继续后续页面，单次最多 10 批，可随时暂停；遇到登录或页面错误不会无限重试。</label>
+            <div id="search-plan" class="route-list empty-state">
+              请先选择地区、岗位方向和工作类型，然后生成搜索路线。
+            </div>
+            <div class="company-watchlist">
+              <div class="company-heading">
+                <div><span class="step">OFFICIAL CAREER PAGES</span><h3>Company Watchlist</h3></div>
+                <p>先填公司名称和地区即可；若你已经知道招聘官网，可在高级选项中补充。</p>
+              </div>
+              <form id="company-form" class="company-form">
+                <input name="name" required placeholder="Company / 公司名称" />
+                <div class="company-markets">
+                  <label><input type="checkbox" name="companyMarkets" value="SG" checked /> SG</label>
+                  <label><input type="checkbox" name="companyMarkets" value="CN" /> CN</label>
+                  <label><input type="checkbox" name="companyMarkets" value="HK" /> HK</label>
+                </div>
+                <details class="company-advanced">
+                  <summary>Advanced / 已知招聘官网（可选）</summary>
+                  <input name="careersUrl" type="url" placeholder="Careers URL / https://…" />
+                </details>
+                <button class="button secondary" type="submit">Add Company / 添加企业</button>
+              </form>
+              <div id="company-list" class="company-list empty-state">尚未添加企业官网。</div>
+            </div>
+          </section>
+
+          <section class="panel" id="jobs-panel">
+            <div class="panel-heading">
+              <div><span class="step">04 / JOB LEDGER</span><h2>Job List &amp; Applications</h2></div>
+              <span class="panel-state">Local workspace / 本机工作区</span>
+            </div>
+            <div class="history-toolbar">
+              <div>
+                <span class="step">BACKUP &amp; MIGRATION</span>
+                <h3>History &amp; Recovery</h3>
+                <p>Local history auto-saved / 本机记录已自动保存。CSV 只用于备份、迁移或在另一台电脑继续。</p>
+              </div>
+              <div class="panel-actions">
+                <label class="button secondary csv-import-button">
+                  Import Previous CSV / 导入上次结果
+                  <input id="jobs-csv-file" type="file" accept=".csv,text/csv" />
+                </label>
+                <a class="button secondary audit-link" id="import-audit-link" href="/api/workspaces/default/import-audit.csv" download hidden>Download Import Audit / 下载导入审计</a>
+                <a class="button primary" href="/api/workspaces/default/export.xlsx" download>Export Excel / 导出 Excel</a>
+                <a class="button secondary" href="/api/workspaces/default/export.csv" download>Export CSV / 导出 CSV</a>
+              </div>
+            </div>
+            <div class="eligibility-reminder">
+              <strong>Worth trying — confirm the details.</strong>
+              <span>具体实习时长、出勤天数、开始日期和灵活安排仍需与雇主确认。</span>
+            </div>
+            <div class="incremental-strip">
+              <strong id="incremental-state">尚未导入历史结果</strong>
+              <span>旧文件不会被修改；重复岗位会在本地合并，并保留原来的投递状态。</span>
+            </div>
+            <div class="manual-job-heading"><span class="step">Add a Found Job / 添加已经找到的职位</span><p>用于录入朋友推荐、企业官网或其他渠道中的某一条具体职位。</p></div>
+            <form class="manual-form" id="manual-job-form">
+              <input name="title" required placeholder="Job title / 职位名称" aria-label="职位名称" />
+              <input name="company" required placeholder="Company / 公司" aria-label="公司" />
+              <input name="location" placeholder="Location / 地点" aria-label="地点" />
+              <input name="url" type="url" placeholder="Job URL / 招聘页面网址 https://…" aria-label="招聘页面网址" />
+              <button class="button secondary" type="submit">Add Job / 手动添加</button>
+            </form>
+            <div class="job-quality-toolbar">
+              <div>
+                <strong id="job-quality-summary">Strong 0 · Adjacent 0 · Broad 0 · Needs review 0</strong>
+                <span>Source-field warnings stay visible without hiding an eligible job. Only unreadable critical records enter Needs review. / 来源字段提示不会隐藏可投岗位；只有关键字段无法读取的记录才进入待复核。</span>
+              </div>
+              <label><input id="show-needs-review" type="checkbox" /> Show needs review / 显示待复核</label>
+            </div>
+            <div class="job-ledger-heading" aria-hidden="true">
+              <span>JOB / 职位</span><span>STATUS / 状态</span>
+            </div>
+            <div id="jobs-body" class="job-ledger-list">
+              <div class="empty-state">暂时没有岗位。你可以手动添加，或运行搜索。</div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
