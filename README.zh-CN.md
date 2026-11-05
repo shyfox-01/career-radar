@@ -4,19 +4,27 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
-一个 Windows 求职工具，用来找新加坡、中国大陆和中国香港的实习与正式工作。导入简历后，它会推荐岗位，到你选的招聘网站读取职位，
+一个 Windows 和 Mac 都能用的求职工具，用来找新加坡、中国大陆和中国香港的实习与正式工作。导入简历后，它会推荐岗位，到你选的招聘网站读取职位，
 用你电脑上运行的 AI 模型筛选，再汇总成一张可以跟进投递、导出 Excel 的列表。
 
 ![Career Radar 从简历到职位列表](docs/images/tour.gif)
 
 ## 下载
 
-在[最新版本](https://github.com/shyfox-01/career-radar/releases/latest)页面下载 `CareerRadar-Setup-<版本>.exe`，双击安装。
-适用于 64 位 Windows 10/11；AI 筛选和 MyCareersFuture 搜索还需要安装 Ollama，见[本地 AI](#本地-ai)。
+在[最新版本](https://github.com/shyfox-01/career-radar/releases/latest)页面下载。AI 筛选和 MyCareersFuture 搜索还需要安装 Ollama，见[本地 AI](#本地-ai)。
+
+**Windows**（64 位 Windows 10/11）：运行 `CareerRadar-Setup-<版本>.exe`。
 
 - 安装包暂时没有数字签名，Windows 可能提示"Windows 已保护你的电脑"，点"更多信息"再点"仍要运行"即可。安装时选"只为我安装"就行。
 - 安装版每次启动时会检查新版本，在后台下载，关闭程序后自动安装，记录不受影响。
 - `CareerRadar-Portable-<版本>.exe` 是便携版，不用安装，记录保存在它旁边的文件夹里，不会自动更新。
+
+**Mac**（Apple 芯片，macOS 13 及以上；Intel 芯片的 Mac 不能用）：打开 `CareerRadar-<版本>-mac-arm64.dmg`，把 Career Radar 拖进"应用程序"。
+
+- 程序没有苹果证书签名，打开会被 macOS 拦下。到"系统设置 → 隐私与安全性"，在 Career Radar 旁边点"仍要打开"并确认；每次换装新版本都要这样放行一次。如果提示"已损坏"，在"终端"里运行一次：
+  `xattr -dr com.apple.quarantine "/Applications/Career Radar.app"`
+- 如果弹出钥匙串提示，输入电脑的登录密码并选"始终允许"，否则各网站的登录状态可能保存不下来。
+- Mac 版不会自动更新，新版本需要到下载页面自己下载。
 
 ## 一次搜索的过程
 

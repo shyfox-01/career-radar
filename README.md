@@ -4,8 +4,8 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
-A Windows app for finding internships and full-time jobs in Singapore, mainland China and
-Hong Kong. Give it a resume and it suggests roles, reads listings from the job sites you
+An app for Windows and Mac that finds internships and full-time jobs in Singapore, mainland
+China and Hong Kong. Give it a resume and it suggests roles, reads listings from the job sites you
 choose, screens them with an AI model running on your own computer, and keeps everything in
 one list you can track and export to Excel.
 
@@ -13,10 +13,10 @@ one list you can track and export to Excel.
 
 ## Download
 
-Download `CareerRadar-Setup-<version>.exe` from the
-[latest release](https://github.com/shyfox-01/career-radar/releases/latest) and run it. It
-runs on 64-bit Windows 10 or 11; AI screening and the MyCareersFuture search also need
-Ollama (see [Local AI](#local-ai)).
+Get it from the [latest release](https://github.com/shyfox-01/career-radar/releases/latest).
+AI screening and the MyCareersFuture search also need Ollama (see [Local AI](#local-ai)).
+
+**Windows** (64-bit Windows 10 or 11): run `CareerRadar-Setup-<version>.exe`.
 
 - The installer is not code-signed yet, so Windows may say "Windows protected your PC".
   Choose **More info**, then **Run anyway**. Installing for yourself only is enough.
@@ -24,6 +24,17 @@ Ollama (see [Local AI](#local-ai)).
   and installs it when you close the app. Your data stays as it is.
 - `CareerRadar-Portable-<version>.exe` runs without installing and keeps its records in a
   folder beside it. It does not update itself.
+
+**Mac** (Apple silicon, macOS 13 or later; Intel Macs are not supported): open
+`CareerRadar-<version>-mac-arm64.dmg` and drag Career Radar into Applications.
+
+- The app is not signed with an Apple certificate, so macOS refuses to open it. Go to
+  **System Settings → Privacy & Security**, choose **Open Anyway** next to Career Radar and
+  confirm; each new version needs this once. If macOS says the app is damaged, run this
+  once in Terminal: `xattr -dr com.apple.quarantine "/Applications/Career Radar.app"`
+- If a keychain prompt appears, enter your login password and choose **Always Allow**, or
+  site sign-ins may not be kept.
+- The Mac app does not update itself; download a new version from the release page.
 
 ## How a search goes
 

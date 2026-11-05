@@ -6,13 +6,15 @@ cloud database or telemetry.
 ## What is stored
 
 The redacted resume, preferences, search plan, jobs and application status are saved as
-files on your computer: in `%APPDATA%\Career Radar\data` for the installed app, or in the
-`CareerRadarData` folder beside the portable app. An uploaded resume file is read in memory
-and not saved.
+files on your computer: in `%APPDATA%\Career Radar\data` for the installed Windows app, in
+the `CareerRadarData` folder beside the portable app, or in
+`~/Library/Application Support/Career Radar/data` on a Mac. An uploaded resume file is read
+in memory and not saved.
 
 Each job site has its own browser session, separate from your normal browser. You type
 credentials into the site's own page; Career Radar never reads them. The sessions are kept
-in `%APPDATA%\Career Radar`, for the portable app too. **Disconnect** clears a site's
+in `%APPDATA%\Career Radar` on Windows, for the portable app too, and in
+`~/Library/Application Support/Career Radar` on a Mac. **Disconnect** clears a site's
 session.
 
 ## What is sent where
@@ -23,9 +25,9 @@ session.
   search plan after you confirm a search. The app refuses an Ollama address that is not on
   your computer.
 - **MyCareersFuture** receives search keywords and the employment type, not the resume.
-- **GitHub** receives an update check each time the installed app starts, which shows it
-  your IP address. The check carries no ID of your computer. The portable app does not
-  check.
+- **GitHub** receives an update check each time the installed Windows app starts, which
+  shows it your IP address. The check carries no ID of your computer. The portable app and
+  the Mac app do not check.
 
 Redaction removes email addresses, phone numbers, profile links and lines that look like a
 street address. Names, student numbers and unusual formats can survive it, so read the
@@ -33,11 +35,13 @@ preview before searching.
 
 ## Limits
 
-- Anyone with access to your Windows account can read the data folder and site sessions.
+- Anyone with access to your account on the computer can read the data folder and site
+  sessions.
 - Text in a listing could try to steer the AI. At worst it keeps the wrong jobs or writes
   wrong notes.
-- Updates are checked against the SHA-512 in each release, but the installers are not
-  code-signed yet.
+- Updates are checked against the SHA-512 in each release, but the Windows installers are
+  not code-signed yet.
+- The Mac app is not signed with an Apple certificate and does not update itself.
 - Whether automated reading is allowed is up to each site's terms.
 
 ## Reporting a problem
