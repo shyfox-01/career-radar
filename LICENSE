@@ -1,0 +1,33 @@
+Copyright (c) 2026 shyfox-01
+
+All rights reserved, except for the permissions granted below.
+
+PERMITTED
+
+  You may download the Career Radar installer or portable app published in the
+  releases of github.com/shyfox-01/career-radar and run it for your own personal
+  job search, at no charge.
+
+NOT PERMITTED WITHOUT PRIOR WRITTEN PERMISSION
+
+  Redistributing the software, modified or unmodified.
+
+  Selling it, sublicensing it, or including it in any product or service.
+
+  Operating it as a hosted or commercial service on behalf of other people.
+
+  Unpacking, decompiling or modifying it, except to the extent that applicable
+  law allows this despite this restriction.
+
+THIRD-PARTY COMPONENTS
+
+  The software includes third-party components, such as Electron and Chromium,
+  which remain under their own licenses.
+
+NO WARRANTY
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM, OUT
+OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
