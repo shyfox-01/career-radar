@@ -1,3 +1,5 @@
+<img src="docs/images/icon.png" alt="" width="88">
+
 # Career Radar
 
 [English](README.md) · [简体中文](README.zh-CN.md)
